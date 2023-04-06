@@ -1,6 +1,6 @@
 // generateBtn: targets the button Generate-Password
 let generateBtn = document.querySelector("#generate");
-let passwordlength;
+let passwordLength;
 
 let numbersArr = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
 let lowerCaseArr = [
@@ -34,7 +34,7 @@ let lowerCaseArr = [
 let upperCaseArr = lowerCaseArr.map(function (x) {
   return x.toUpperCase();
 });
-console.log(upperCaseArr);
+
 let specialCharArr = [
   "!",
   "@",
@@ -61,8 +61,8 @@ let specialCharArr = [
 
 function getOrder() {
   let confirmedCharArr = [];
-  passwordlength = prompt(
-    "How many characters do you want your password to have? Please enter a number between 8 and 128"
+  passwordLength = prompt(
+    "How many characters do you want your password to have? Please enter a number between 8 and 128 and only use the number keys."
   );
   if (confirm("Do you want your passwrod to include NUMBERS?")) {
     confirmedCharArr = confirmedCharArr.concat(numbersArr);
@@ -84,15 +84,23 @@ function getOrder() {
       getOrder();
     }
   }
-
-  console.log(confirmedCharArr);
+  return [passwordLength, confirmedCharArr];
 }
-getOrder();
 
 function generatePassword() {
-  console.log("button is clicked");
+  let orders = getOrder();
+  let passLength = orders[0];
+  let confirmedCharArray = orders[1];
 
-  return "Generated password will go here!";
+  let password = "";
+
+  for (let i = 0; i < passLength; i++) {
+    let randomNumber = Math.floor(
+      Math.random() * confirmedCharArray.length - 1
+    );
+    password += confirmedCharArray[randomNumber];
+  }
+  return password;
 }
 
 // Write password to the #password input
