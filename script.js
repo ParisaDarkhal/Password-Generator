@@ -114,11 +114,10 @@ function generatePassword() {
   let confirmedCharArray = orders[1];
 
   let password = "";
+  console.log(confirmedCharArray);
 
   for (let i = 0; i < passLength; i++) {
-    let randomNumber = Math.floor(
-      Math.random() * confirmedCharArray.length - 1
-    );
+    let randomNumber = Math.ceil(Math.random() * confirmedCharArray.length - 1);
     password += confirmedCharArray[randomNumber];
   }
   return password;
