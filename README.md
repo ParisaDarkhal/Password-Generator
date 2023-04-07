@@ -2,7 +2,7 @@
 
 This is a web application that generates passwords based on user input. When the user clicks the **"Generate Password"** button, a prompt pops up to ask for the number of characters needed in the password. The user needs to enter a **number** between **8-128**. After confirming, the user is prompted to choose whether the password should contain numbers, upper case letters, lower case letters, and special characters. The user needs to accept **at least one** of the suggested characters. The web application then generates a password and presents it in the assigned box.
 
----
+[Visit Password Generator Page](https://parisadarkhal.github.io/Password-Generator/)
 
 ## How to use
 
