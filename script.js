@@ -117,7 +117,7 @@ function generatePassword() {
   console.log(confirmedCharArray);
 
   for (let i = 0; i < passLength; i++) {
-    let randomNumber = Math.ceil(Math.random() * confirmedCharArray.length - 1);
+    let randomNumber = Math.floor(Math.random() * confirmedCharArray.length);
     password += confirmedCharArray[randomNumber];
   }
   return password;
