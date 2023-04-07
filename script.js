@@ -61,21 +61,40 @@ let specialCharArr = [
 
 function getOrder() {
   let confirmedCharArr = [];
+  let hasNumber = false;
+  let hasLowerCase = false;
+  let hasUpperCase = false;
+  let hasSpecial = false;
   passwordLength = prompt(
     "How many characters do you want your password to have? Please enter a number between 8 and 128 and only use the number keys."
   );
-  if (confirm("Do you want your passwrod to include NUMBERS?")) {
+  if (passwordLength === null) {
+    return;
+  }
+  hasNumber = confirm("Do you want your passwrod to include NUMBERS?");
+  hasLowerCase = confirm(
+    "Do you want your passwrod to include LOWER CASE LETTERS?"
+  );
+  hasUpperCase = confirm(
+    "Do you want your passwrod to include UPPER CASE LETTERS?"
+  );
+  hasSpecial = confirm(
+    "Do you want your passwrod to include SPECIAL CHARACTERS?"
+  );
+
+  if (hasNumber) {
     confirmedCharArr = confirmedCharArr.concat(numbersArr);
   }
-  if (confirm("Do you want your passwrod to include UPPER CASE LETTERS?")) {
-    confirmedCharArr = confirmedCharArr.concat(upperCaseArr);
-  }
-  if (confirm("Do you want your passwrod to include LOWER CASE LETTERS?")) {
+  if (hasLowerCase) {
     confirmedCharArr = confirmedCharArr.concat(lowerCaseArr);
   }
-  if (confirm("Do you want your passwrod to include SPECIAL CHARACTERS?")) {
+  if (hasUpperCase) {
+    confirmedCharArr = confirmedCharArr.concat(upperCaseArr);
+  }
+  if (hasSpecial) {
     confirmedCharArr = confirmedCharArr.concat(specialCharArr);
-  } else {
+  }
+  if (confirmedCharArr.length === 0) {
     if (
       confirm(
         "You need to chose at least one type of character. Please try again."
@@ -83,7 +102,9 @@ function getOrder() {
     ) {
       getOrder();
     }
+    return;
   }
+
   return [passwordLength, confirmedCharArr];
 }
 
