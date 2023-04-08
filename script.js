@@ -1,5 +1,7 @@
 // generateBtn: targets the button Generate-Password
 let generateBtn = document.querySelector("#generate");
+
+// sets variables and arrays to pick up from
 let passwordLength;
 
 let numbersArr = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
@@ -59,7 +61,9 @@ let specialCharArr = [
   ">",
 ];
 
+// set function to get number of the passweor character and types of characters from user
 function getOrder() {
+  // set boolean variables for user choices of characters
   let confirmedCharArr = [];
   let hasNumber = false;
   let hasLowerCase = false;
@@ -71,17 +75,22 @@ function getOrder() {
   if (passwordLength === null) {
     return;
   }
-  hasNumber = confirm("Do you want your passwrod to include NUMBERS?");
-  hasLowerCase = confirm(
-    "Do you want your passwrod to include LOWER CASE LETTERS?"
-  );
-  hasUpperCase = confirm(
-    "Do you want your passwrod to include UPPER CASE LETTERS?"
-  );
-  hasSpecial = confirm(
-    "Do you want your passwrod to include SPECIAL CHARACTERS?"
-  );
-
+  if (passwordLength > 8 && passwordLength < 128) {
+    hasNumber = confirm("Do you want your passwrod to include NUMBERS?");
+    hasLowerCase = confirm(
+      "Do you want your passwrod to include LOWER CASE LETTERS?"
+    );
+    hasUpperCase = confirm(
+      "Do you want your passwrod to include UPPER CASE LETTERS?"
+    );
+    hasSpecial = confirm(
+      "Do you want your passwrod to include SPECIAL CHARACTERS?"
+    );
+  } else {
+    alert("Please chose a number between 8 and 128.");
+    getOrder();
+  }
+  // put user's choice of characters in an array to pick from later
   if (hasNumber) {
     confirmedCharArr = confirmedCharArr.concat(numbersArr);
   }
@@ -107,7 +116,7 @@ function getOrder() {
 
   return [passwordLength, confirmedCharArr];
 }
-
+// set function to generate password by getting a random item from the array that contains characters the user chosen
 function generatePassword() {
   let orders = getOrder();
   let passLength = orders[0];
