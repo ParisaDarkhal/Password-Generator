@@ -75,34 +75,35 @@ function getOrder() {
   if (passwordLength === null) {
     return;
   }
+  // put user's choice of characters in an array to pick from later
   if (passwordLength > 8 && passwordLength < 128) {
     hasNumber = confirm("Do you want your passwrod to include NUMBERS?");
+    if (hasNumber) {
+      confirmedCharArr = confirmedCharArr.concat(numbersArr);
+    }
     hasLowerCase = confirm(
       "Do you want your passwrod to include LOWER CASE LETTERS?"
     );
+    if (hasLowerCase) {
+      confirmedCharArr = confirmedCharArr.concat(lowerCaseArr);
+    }
     hasUpperCase = confirm(
       "Do you want your passwrod to include UPPER CASE LETTERS?"
     );
+    if (hasUpperCase) {
+      confirmedCharArr = confirmedCharArr.concat(upperCaseArr);
+    }
     hasSpecial = confirm(
       "Do you want your passwrod to include SPECIAL CHARACTERS?"
     );
+    if (hasSpecial) {
+      confirmedCharArr = confirmedCharArr.concat(specialCharArr);
+    }
   } else {
     alert("Please chose a number between 8 and 128.");
-    getOrder();
+    return;
   }
-  // put user's choice of characters in an array to pick from later
-  if (hasNumber) {
-    confirmedCharArr = confirmedCharArr.concat(numbersArr);
-  }
-  if (hasLowerCase) {
-    confirmedCharArr = confirmedCharArr.concat(lowerCaseArr);
-  }
-  if (hasUpperCase) {
-    confirmedCharArr = confirmedCharArr.concat(upperCaseArr);
-  }
-  if (hasSpecial) {
-    confirmedCharArr = confirmedCharArr.concat(specialCharArr);
-  }
+
   if (confirmedCharArr.length === 0) {
     if (
       confirm(
@@ -116,6 +117,7 @@ function getOrder() {
 
   return [passwordLength, confirmedCharArr];
 }
+
 // set function to generate password by getting a random item from the array that contains characters the user chosen
 function generatePassword() {
   let orders = getOrder();
